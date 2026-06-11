@@ -58,7 +58,7 @@ export default function CourseSidebar({
 
       {/* Sidebar */}
       <aside className={cn(
-        "fixed lg:static inset-y-0 left-0 z-50 w-[340px] shrink-0 bg-white lg:rounded-xl lg:border border-r border-border-main lg:shadow-sm transition-transform duration-300 h-full overflow-hidden flex flex-col",
+        "fixed lg:static inset-y-0 left-0 z-50 w-[290px] sm:w-[340px] shrink-0 bg-white lg:rounded-xl lg:border border-r border-border-main lg:shadow-sm transition-transform duration-300 h-full overflow-hidden flex flex-col",
         isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
       )}>
         <div className="p-5 flex items-center justify-between border-b border-border-main shrink-0">
@@ -106,8 +106,8 @@ export default function CourseSidebar({
                       // Set active lesson based on URL parameter (fallback to first lesson if not set)
                       const isActive = isActiveModule && (lessonId ? lesson.id === lessonId : lIdx === 0);
                       
-                      const type = lIdx % 3 === 0 ? 'Video' : 'Bacaan';
-                      const duration = `${lIdx + 5} ${type === 'Video' ? 'dtk' : 'mnt'}`;
+                      const type = lesson.type;
+                      const duration = lesson.duration;
 
                       const isUnlocked = isLessonUnlocked(lesson.id);
 

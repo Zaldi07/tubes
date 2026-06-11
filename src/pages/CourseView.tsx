@@ -34,9 +34,13 @@ export default function CourseView() {
     localStorage.setItem('completed_lessons', JSON.stringify(completedLessons));
   }, [completedLessons]);
 
-  // Close sidebar on navigation on mobile
+  // Close sidebar and reset scroll position on navigation
   useEffect(() => {
     setIsSidebarOpen(false);
+    const mainEl = document.querySelector('main');
+    if (mainEl) {
+      mainEl.scrollTop = 0;
+    }
   }, [location]);
 
   const handleCompleteLesson = (id: string) => {
@@ -130,15 +134,15 @@ export default function CourseView() {
       
       <CourseNavbar onMenuClick={() => setIsSidebarOpen(true)} completedLessons={completedLessons} />
       
-      <div className="flex flex-1 overflow-hidden p-4 lg:p-4 lg:gap-6 max-w-full px-4 lg:px-6 mx-auto w-full relative z-10">
+      <div className="flex flex-1 overflow-hidden p-0 sm:p-4 lg:gap-6 max-w-full px-0 sm:px-6 mx-auto w-full relative z-10">
         <CourseSidebar 
           isOpen={isSidebarOpen} 
           onClose={() => setIsSidebarOpen(false)} 
           completedLessons={completedLessons}
         />
         
-        <main className="flex-1 bg-white rounded-xl border border-border-main overflow-y-auto relative flex flex-col w-full h-full shadow-xs">
-          <div className="mx-auto w-full max-w-6xl p-6 md:p-12">
+        <main className="flex-1 bg-white rounded-none sm:rounded-xl border-0 sm:border border-border-main overflow-y-auto relative flex flex-col w-full h-full shadow-none sm:shadow-xs">
+          <div className="mx-auto w-full max-w-6xl p-4 sm:p-6 md:p-12">
              {renderContent()}
           </div>
         </main>
